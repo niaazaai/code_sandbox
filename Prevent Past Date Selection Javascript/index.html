@@ -6,14 +6,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Prevent Past Date Selection Javascript</title>
 </head>
 <body>
-     
-        <label for="FinishDate" class="form-label">DeadLine <span class="text-danger " > * </span></label><br>
-        <input type="Date" class="form-control" id="FinishDate" name="FinishDate" min = 0  type="text" required  />
-   
-
+    <h4>ADD THIS CHUNK TO FIELDS OF DATA TO PREVENT USER FOR SELECTING PAST DATES </h4>
+    <label for="FinishDate" class="form-label">DeadLine <span class="text-danger " > * </span></label><br>
+    <input type="Date" class="form-control" id="FinishDate" name="FinishDate" min = 0  type="text" required  />
     <script language="javascript">
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
@@ -23,8 +21,5 @@
         today = yyyy + '-' + mm + '-' + dd;
         document.getElementById('FinishDate').setAttribute('min',today);
     </script>
-
-
-
 </body>
 </html>
