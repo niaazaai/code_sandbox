@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Count up Timer</title>
+</head>
+<body>
+
+/*
+|--------------------------------------------------------------------------
+| Javascript count up timer 
+|--------------------------------------------------------------------------
+| this documentation is for adding count up timer with number of days   
+| using php / js / css 
+*/
+
+
+/*
+|--------------------------------------------------------------------------
+| CSS Part 
+|--------------------------------------------------------------------------
+| there is .tff file needs to included to project 
+*/
+
+<style>
+    #clock {
+        font-size: 40px;
+        color:#38E54D;
+    }
+    @font-face {
+        font-family: 'seven-segment'; /*a name to be used later*/
+        src: url('../Public/Font/Seven Segment.ttf'); /*URL to font*/
+    }
+</style>
+
+<!-- /*
+|--------------------------------------------------------------------------
+| HTML  & PHP Part  
+|--------------------------------------------------------------------------
+*/ <?=(isset($production_start_date)) ? $production_start_date : 'NULL';?> 
+date_default_timezone_set('Asia/Kabul'); -->
+
+<div class = "bg-dark text-center" style = "width:230px;border-radius:5px;font-family: 'seven-segment';" >
+    <span id = "clock" class="countup-timer m-0  pt-1 px-1" ></span>
+</div>
+
+<meta id = "production_start_date"  name="production_start_date" content="16-03-2023 08:10:23">
+<input type="hidden" id="stop_counter" value = "<?= isset($stop_counter) ? $stop_counter : '' ; ?>" >
+
+
+<!-- /*
+|--------------------------------------------------------------------------
+| JavaScript 
+|--------------------------------------------------------------------------
+*/ -->
+
+<script>
+    let psd = document.getElementById('production_start_date').content; 
+
+    if(psd != 'NULL'){
+
+        let startingDate = new Date(psd).getTime();
+        let counter = document.querySelector('.countup-timer');
+        const zeroPad = (num, places) => String(num).padStart(places, '0')
+
+        let timer = setInterval(function() {
+
+            let newDate = new Date().getTime();
+            let finalDate = newDate - startingDate;
+
+            let days = Math.floor(finalDate / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((finalDate % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((finalDate % (1000 * 60 *60)) / (1000 * 60));
+            let seconds = Math.floor((finalDate % (1000 * 60)) / 1000);
+
+            counter.innerHTML =  zeroPad(days,2) + "-" + zeroPad(hours,2) + ":" + zeroPad(minutes,2) + ":" + zeroPad(seconds,2);
+            if( document.getElementById('stop_counter').value == 'yes') clearInterval(timer); 
+
+        }, 1000) 
+    }
+
+    function SetStatus(status){
+        let stat = document.getElementById('status');
+        stat.value = status; 
+        if(confirm('ایا مطمین استید برای متوقف نمودن تولید؟')) stat.form.submit(); 
+        else return ; 
+    }
+</script>
+
+
+
+    
+</body>
+</html>
