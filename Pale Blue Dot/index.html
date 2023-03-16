@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            position: relative;
+            font-family: "Lato", sans-serif;
+            text-align: center;
+            color: #eee;
+            background: radial-gradient(#1C2B3B, #07080B);
+            font-size: 16px;
+            font-weight: 400;
+            overflow: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            transition: box-shadow 0.15s ease;
+        }
+        a:hover {
+            box-shadow: 0 1px 0 white;
+        }
+
+        .heading {
+            position: relative;
+            z-index: 20;
+            margin-top: 2rem;
+            padding: 0 1rem;
+        }
+        .heading h1 {
+            font-family: "Lato", sans-serif;
+            font-weight: 300;
+            font-size: 3rem;
+            margin-bottom: 0;
+        }
+        .heading span {
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 575.98px) {
+            .heading h1 {
+                font-size: 2.2rem;
+            }
+        }
+        .map {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            width: 200px;
+            height: 200px;
+            border-radius: 100%;
+            box-shadow: inset -30px -20px 0 0 rgba(0, 0, 0, 0.1), inset -70px -30px 0 0 rgba(0, 0, 0, 0.1), inset 5px 5px 0 0 rgba(255, 255, 255, 0.2);
+            background: url("http://tirsolecointere.com.ve/palebluedot/img/map.png") lightblue;
+            background-size: cover;
+            animation: earth-rotation 10s linear infinite;
+        }
+
+        @keyframes earth-rotation {
+        from {
+            background-position: left center;
+        }
+        to {
+            background-position: -396px center;
+        }
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 100%;
+            box-shadow: 0 0 3px 3px rgba(255, 255, 255, 0.4);
+        }
+        .star:nth-child(2n) {
+            animation: star-blink 2s infinite linear;
+        }
+        .star:nth-child(2n+1) {
+            animation: star-blink 2s infinite linear;
+            animation-delay: 1s;
+        }
+        .star._1 {
+            top: 10%;
+            left: 20%;
+        }
+        .star._2 {
+            top: 94%;
+            left: 60%;
+        }
+        .star._3 {
+            top: 30%;
+            left: 50%;
+        }
+        .star._4 {
+            top: 75%;
+            left: 44%;
+        }
+        .star._5 {
+            top: 60%;
+            left: 60%;
+        }
+        .star._6 {
+            top: 80%;
+            left: 30%;
+        }
+        .star._7 {
+            top: 80%;
+            left: 70%;
+        }
+        .star._8 {
+            top: 30%;
+            left: 80%;
+        }
+        .star._9 {
+            top: 10%;
+            left: 90%;
+        }
+        .star._10 {
+            top: 90%;
+            left: 7%;
+        }
+        .star._11 {
+            top: 40%;
+            left: 90%;
+        }
+        .star._12 {
+            top: 40%;
+            left: 25%;
+        }
+        .star._13 {
+            top: 70%;
+            left: 20%;
+        }
+        .star._14 {
+            top: 20%;
+            left: 30%;
+        }
+        .star._15 {
+            top: 90%;
+            left: 90%;
+        }
+        .star._16 {
+            top: 4%;
+            left: 5%;
+        }
+        .star._17 {
+            top: 35%;
+            left: 9%;
+        }
+        .star._18 {
+            top: 70%;
+            left: 79%;
+        }
+        .star._19 {
+            top: 39%;
+            left: 69%;
+        }
+        .star._20 {
+            top: 19%;
+            left: 65%;
+        }
+
+        @keyframes star-blink {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(2);
+        }
+        100% {
+            transform: scale(1);
+        }
+        }
+        .quote {
+            display: block;
+            max-width: 600px;
+            margin: 0 auto 1rem;
+            padding: 1rem 1rem;
+            font-size: 14px;
+            font-weight: 300;
+            position: absolute;
+            right: 0;
+            bottom: 1rem;
+            left: 0;
+            text-shadow: 0 0 3px black;
+        }
+        .quote__footer {
+            display: block;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 575.98px) {
+        .quote {
+            font-size: 13px;
+        }
+        }
+
+    </style>
+</head>
+<body>
+    
+
+
+<header class="heading">
+   <h1>PALE BLUE DOT</h1>
+   <span>by <a href="https://github.com/tirsolecointere">Tirso Lecointere</a></span>
+</header>
+
+<div class="star _1"></div>
+<div class="star _2"></div>
+<div class="star _3"></div>
+<div class="star _4"></div>
+<div class="star _5"></div>
+<div class="star _6"></div>
+<div class="star _7"></div>
+<div class="star _8"></div>
+<div class="star _9"></div>
+<div class="star _10"></div>
+<div class="star _11"></div>
+<div class="star _12"></div>
+<div class="star _13"></div>
+<div class="star _14"></div>
+<div class="star _15"></div>
+<div class="star _16"></div>
+<div class="star _17"></div>
+<div class="star _18"></div>
+<div class="star _19"></div>
+<div class="star _20"></div>
+
+<div class="map"></div>
+
+<div class="quote">"Look again at that dot. That's here. That's home. That's us. On it everyone you love, everyone you know, everyone you ever heard of, every human being who ever was, lived out their lives. The aggregate of our joy and suffering, thousands of confident religions, ideologies, and economic doctrines, every hunter and forager, every hero and coward, every creator and destroyer of civilization, every king and peasant, every young couple in love, every mother and father, hopeful child, inventor and explorer, every teacher of morals, every corrupt politician, every "superstar," every "supreme leader," every saint and sinner in the history of our species lived there-on a mote of dust suspended in a sunbeam." <span class="quote__footer">― Carl Sagan, Pale Blue Dot: A Vision of the Human Future in Space</span></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
