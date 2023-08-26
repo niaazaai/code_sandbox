@@ -1,0 +1,132 @@
+|--------------------------------------------------------------------------
+| Routes  
+|--------------------------------------------------------------------------
+
+
+    Route::match(['get', 'post'], '/', function () {
+        // ...
+    });
+
+    Route::any('/', function () {
+        // ...
+    });
+
+    Route::redirect('/here', '/there');
+    Route::redirect('/here', '/there', 301);    
+    Route::permanentRedirect('/here', '/there');
+
+    Route::view('/welcome', 'welcome');
+    Route::view('/welcome', 'welcome', ['name' => 'Taylor']);
+
+    # The Route List
+    > php artisan route:list
+    > php artisan route:list -v <-- to show route middleware     
+    > php artisan route:list --path=api  <-- to show only api routes 
+    > php artisan route:list --except-vendor <-- exclude vendor routes (third-party packages)
+    > php artisan route:list --only-vendor <-- show only vendor routes (third-party packages)
+
+    # Route Parameters
+    Route::get('/user/{id}', function (string $id) {
+        return 'User '.$id;
+    });
+
+    # Optional Parameters
+
+    Route::get('/user/{name?}', function (string $name = null) {
+        return $name;
+    });
+    
+    Route::get('/user/{name?}', function (string $name = 'John') {
+        return $name;
+    });
+
+    # Regular Expression Constraints
+
+    Route::get('/user/{id}/{name}', function (string $id, string $name) {
+        return 'USER -- ' . $id  . ' -- ' . $name ; 
+    })->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
+    ____________________________________________
+
+    ->whereNumber('id')->whereAlpha('name');
+    ->whereAlphaNumeric('name');
+    ->whereIn('category', ['movie', 'song', 'painting']);
+    ->whereUuid('id');
+    ____________________________________________
+
+    to allow / itself in routes we use below code. 
+    Route::get('/search/{search}', function (string $search) {
+        return $search;
+    })->where('search', '.*');
+
+
+    # Named Routes
+    Route::get('/user/profile', function () {
+        // ...
+    })->name('profile');
+    
+    Route::get(  '/user/profile',  [UserProfileController::class, 'show'])->name('profile');
+ 
+    $url = route('profile');
+    $url = route('profile', ['id' => 1]);
+    $url = route('profile', ['id' => 1, 'photos' => 'yes']); // /user/1/profile?photos=yes <-- if Parameters was not in the route it will be added automatically 
+    return redirect()->route('profile');
+    return to_route('profile');
+
+    if ($request->route()->named('profile')) {
+        // to determine if the current request was routed to a given named route
+    }
+
+    # Middleware
+
+    Route::middleware(['first', 'second'])->group(function () {
+        Route::get('/', function () {
+            // Uses first & second middleware...
+        });
+    
+        Route::get('/user/profile', function () {
+            // Uses first & second middleware...
+        });
+    });
+
+
+    use App\Http\Controllers\OrderController;
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/orders/{id}', 'show');
+        Route::post('/orders', 'store');
+    });
+
+    Route::prefix('admin')->group(function () {
+        Route::get('/users', function () {
+            // Matches The "/admin/users" URL
+        });
+    });
+
+
+
+
+    # Rate Limiting
+
+
+    RateLimiter::for('global', function (Request $request) {
+        return Limit::perMinute(1000);
+    });
+
+
+    <form action="/example" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    </form>
+
+    <form action="/example" method="POST">
+        @method('PUT') // PUT, PATCH,  DELETE 
+        @csrf
+    </form>
+
+
+    $route = Route::current(); // Illuminate\Routing\Route
+    $route->uri; 
+    $name = Route::currentRouteName(); // string
+    $action = Route::currentRouteAction(); // string
+        
+    > php artisan route:cache
+    > php artisan route:clear
